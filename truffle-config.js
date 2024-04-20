@@ -19,7 +19,7 @@
  */
 
 require('dotenv').config();
-const {PRIVATE_KEY, INFURA_API_KEY} = process.env;
+const {PRIVATE_KEY, INFURA_API, DEV_INFURA_API } = process.env;
 
 const HDWalletProvider = require('@truffle/hdwallet-provider');
 
@@ -47,8 +47,13 @@ module.exports = {
         //  network_id: "*",       // Any network (default: none)
         // },
         //
+        mainnet: {
+            provider: () => new HDWalletProvider(PRIVATE_KEY, INFURA_API),
+            network_id: "1",
+            gas: 1_000_000,
+        },
         sepolia: {
-            provider: () => new HDWalletProvider(PRIVATE_KEY, INFURA_API_KEY),
+            provider: () => new HDWalletProvider(PRIVATE_KEY, DEV_INFURA_API),
             network_id: "11155111",
             gas: 4465030,
         }
