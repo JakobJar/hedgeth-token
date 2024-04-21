@@ -19,7 +19,7 @@
  */
 
 require('dotenv').config();
-const {PRIVATE_KEY, INFURA_API, DEV_INFURA_API } = process.env;
+const {PRIVATE_KEY, INFURA_API, DEV_INFURA_API, ETHERSCAN_API_KEY } = process.env;
 
 const HDWalletProvider = require('@truffle/hdwallet-provider');
 
@@ -33,6 +33,13 @@ module.exports = {
      *
      * $ truffle test --network <network-name>
      */
+    plugins: [
+        'truffle-plugin-verify'
+    ],
+
+    api_keys: {
+        etherscan: ETHERSCAN_API_KEY,
+    },
 
     networks: {
         // Useful for testing. The `development` name is special - truffle uses it by default
